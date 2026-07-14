@@ -138,9 +138,13 @@ static void actualizar_hex(void) {
     }
 
     unsigned long value = strtoul(text, NULL, 16);
-    formatear_float(hex_to_float((uint32_t)value), out, sizeof(out));
+    float f = hex_to_float((uint32_t)value);
+
+    formatear_float(f, out, sizeof(out));
+
     set_control_text(g_app.resultFloat, out);
-}
+    SetWindowTextA(g_app.floatEdit, out);
+    }
 
 static void actualizar_float(void) {
     char text[64];
@@ -391,7 +395,7 @@ static void mostrar_about(HWND owner) { //
 
     CreateWindowExA(0, "STATIC", "Hex-Float IEEE-754 por PeterDelta", WS_CHILD | WS_VISIBLE | SS_CENTER,
                     10, 10, 260, 20, g_aboutWnd, NULL, NULL, NULL);
-    HWND link = CreateWindowExA(0, "STATIC", "v0.90 github link", WS_CHILD | WS_VISIBLE | SS_CENTER | SS_NOTIFY,
+    HWND link = CreateWindowExA(0, "STATIC", "v0.91 github link", WS_CHILD | WS_VISIBLE | SS_CENTER | SS_NOTIFY,
                                 60, 35, 150, 20, g_aboutWnd, NULL, NULL, NULL);
     g_aboutLink = link;
     SetWindowLongPtrA(link, GWLP_USERDATA, (LONG_PTR)"https://github.com/PeterDelta/Hex-Float");
